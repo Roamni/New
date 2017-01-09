@@ -6,10 +6,7 @@ target 'Roamni' do
   use_frameworks!
 
   # Pods for Roamni
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'FBSDKCoreKit'
-  pod 'FBSDKShareKit'
+  
   pod 'FBSDKLoginKit'
   target 'RoamniTests' do
     inherit! :search_paths
