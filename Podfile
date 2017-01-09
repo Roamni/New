@@ -7,6 +7,8 @@ target 'Roamni' do
 
   # Pods for Roamni
   
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   target 'RoamniTests' do
     inherit! :search_paths
