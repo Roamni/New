@@ -7,7 +7,7 @@ target 'Roamni' do
 
   # Pods for Roamni
   pod 'Firebase/Core'
-  
+  pod 'Firebase/Auth'
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
