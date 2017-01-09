@@ -6,6 +6,7 @@ target 'Roamni' do
   use_frameworks!
 
   # Pods for Roamni
+  pod 'Firebase/Core'
   
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
