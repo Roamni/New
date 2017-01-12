@@ -39,13 +39,14 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
         case 4: return 1
         case 5: return 1
         case 6: return 1
+        case 7: return 1
         default: return 0
         }
         
     }
     func numberOfSections(in tableView: UITableView) -> Int{
         // #warning Incomplete implementation, return the number of sections
-        return 7
+        return 8
     }
 
 //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -74,6 +75,9 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
             return 50.0//Choose your custom row height
         }
         if indexPath.section == 6{
+            return 50.0//Choose your custom row height
+        }
+        if indexPath.section == 7{
             return 50.0//Choose your custom row height
         }
      
@@ -124,10 +128,16 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
             
             
-        }else {
+        }else if indexPath.section == 6{
             //Return the cell with identifier AboutTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyRoamniAboutCell", for: indexPath as IndexPath)
                 as! MyRoamniAboutCell
+            return cell
+        }
+        else {
+            //Return the cell with identifier AboutTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyRoamniLoginCell", for: indexPath as IndexPath)
+                as! MyRoamniLoginCell
             return cell
             
             

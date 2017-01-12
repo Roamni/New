@@ -21,7 +21,7 @@ class SearchListTableViewController: UITableViewController{
     // MARK: - View Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchTours()
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
@@ -32,16 +32,16 @@ class SearchListTableViewController: UITableViewController{
         searchController.searchBar.scopeButtonTitles = ["Default", "Rating", "Length"]
         tableView.tableHeaderView = searchController.searchBar
         
-        tours = [
-            Tour(category:"walking", name:"Melbourne Central",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"walking", name:"Victoria Gallery",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"driving", name:"The Great Ocean Road",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"cycling", name:"Yarra Valley",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"shopping", name:"DFO",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"realestate", name:"South Yarra",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"access", name:"Federation Square",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"more", name:"Sour Chew",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
-            Tour(category:"premium", name:"Eureka Tower Melbourne",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great")]
+//        tours = [
+//            Tour(category:"walking", name:"Melbourne Central",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"walking", name:"Victoria Gallery",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"driving", name:"The Great Ocean Road",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"cycling", name:"Yarra Valley",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"shopping", name:"DFO",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"realestate", name:"South Yarra",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"access", name:"Federation Square",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"more", name:"Sour Chew",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great"),
+//            Tour(category:"premium", name:"Eureka Tower Melbourne",locations:[CLLocation(latitude: -56.6462520, longitude: -36.6462520)], desc: "This is a great")]
         
         if let splitViewController = splitViewController {
             let controllers = splitViewController.viewControllers
@@ -51,6 +51,35 @@ class SearchListTableViewController: UITableViewController{
         }
     }
     
+    func fetchTours(){
+        var ref:FIRDatabaseReference?
+        ref = FIRDatabase.database().reference()
+        
+        ref?.child("tours").observe(.childAdded, with:{ (snapshot) in
+            let dictionary = snapshot.value as!  [String : Any]
+           // tour.setValuesForKeys(dictionary)
+            let location = dictionary["StartPoint"] as!  [String : Any]
+            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:[CLLocation(latitude:location["lat"] as! CLLocationDegrees, longitude: location["lon"] as! CLLocationDegrees)], desc: dictionary["desc"] as! String)
+            //            tour.Price = dictionary["Price"] as! String?
+            //            tour.Star = dictionary["Star"] as! String?
+            //            tour.StartPoint = dictionary["StartPoint"] as! String?
+            //            tour.Time = dictionary["Time"] as! String?
+            //            tour.TourType = dictionary["TourType"] as! String?
+            //            tour.WholeTour = dictionary["WholeTour"] as! String?
+            print(tour)
+            self.tours.append(tour)
+            
+            //self.artworks.removeAll()
+            DispatchQueue.main.async(execute: {self.tableView.reloadData() } )
+            
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+    
+    
+    
+    }
     override func viewWillAppear(_ animated: Bool) {
        // clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
