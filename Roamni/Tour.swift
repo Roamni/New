@@ -12,6 +12,6 @@ import CoreLocation
 struct Tour {
     let category : String
     let name : String
-    let locations : [CLLocation]
+    let locations : CLLocationCoordinate2D
     let desc : String
 }

@@ -15,6 +15,7 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
          self.tableView.dataSource = self
         self.tableView.delegate = self
+        tableView.tableFooterView = UIView()
         //DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
         self.tableView.reloadData()
             
@@ -57,7 +58,7 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
     {
         
         if indexPath.section == 0{
-            return 120.0//Choose your custom row height
+            return 80.0//Choose your custom row height
         }
         if indexPath.section == 1{
             return 50.0//Choose your custom row height
@@ -150,7 +151,18 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
         //        }
     }
 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        
+        switch(section) {
+        case 0:return "  "
+        case 1:return "  "
+        case 7:return "  "
 
+            
+        default :return ""
+    }
+    }
 
 
     /*
