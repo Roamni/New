@@ -25,8 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UISplitViewControllerDel
 //        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
 //        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
     //    splitViewController.delegate = self
-        
-      
+        UISearchBar.appearance().barTintColor = UIColor.candyGreen()
+        UISearchBar.appearance().tintColor = UIColor.white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.candyGreen()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UINavigationBar.appearance().tintColor = UIColor.white
         return true
     }
     
@@ -117,5 +120,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UISplitViewControllerDel
         }
     }
 
+}
+extension UIColor {
+    static func candyGreen() -> UIColor {
+        return UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+    }
 }
 

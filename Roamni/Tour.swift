@@ -14,4 +14,5 @@ struct Tour {
     let name : String
     let locations : CLLocationCoordinate2D
     let desc : String
+    let address : String
 }

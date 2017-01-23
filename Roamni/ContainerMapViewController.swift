@@ -19,8 +19,7 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
     var aTour : TourForMap?
     let regionRadius: CLLocationDistance = 1000
     
-    override func viewDidAppear(_ animated: Bool) {
-
+    override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         
@@ -45,14 +44,40 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
         let span = MKCoordinateSpanMake(0.0018, 0.0018)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!), span: span)
         mapView.setRegion(region, animated: true)
+
+
+    }
+    
+    @IBAction func backToCurrentLocation(_ sender: Any) {
+        mapView.delegate = self
         
+        self.locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        self.mapView.showsUserLocation = true
+        mapView.showsUserLocation = true
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        self.mapView.showsUserLocation = true
+        let span = MKCoordinateSpanMake(0.0018, 0.0018)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!), span: span)
+        mapView.setRegion(region, animated: true)
+
+
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+
+        super.viewDidLoad()
+                //self.places.removeAll()
         mapView.removeAnnotations(mapView.annotations)
         for thetour in tours{
-            let place = TourForMap(title: thetour.name, info: thetour.name, coordinate: thetour.locations)
+            let place = TourForMap(title: thetour.name, info: thetour.address, coordinate: thetour.locations)
             places.append(place)
         }
-        self.mapView.addAnnotations(places)
-
+        
+        mapView.addAnnotations(places)
         //fetchTours()
 
         // Do any additional setup after loading the view.
@@ -75,7 +100,7 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
             //let longitude = (location["lon"] as! NSString).doubleValue
             let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             
-            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String)
+            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address:dictionary["desc"] as! String )
             //            tour.Price = dictionary["Price"] as! String?
             //            tour.Star = dictionary["Star"] as! String?
             //            tour.StartPoint = dictionary["StartPoint"] as! String?
@@ -86,7 +111,7 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
             print("tourn is \(tour.locations)")
             //self.tours.append(tour)
             
-            let place = TourForMap(title: tour.name, info: tour.name, coordinate: coordinate)
+            let place = TourForMap(title: tour.name, info: tour.address, coordinate: coordinate)
             self.mapView.addAnnotation(place)
             
             //self.artworks.removeAll()

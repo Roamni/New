@@ -31,11 +31,13 @@
 		F02617F91E2F97C0004697EA /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02617F81E2F97C0004697EA /* ContainerViewController.swift */; };
 		F02617FB1E2F97CA004697EA /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02617FA1E2F97CA004697EA /* EmptySegue.swift */; };
 		F02617FD1E3222F7004697EA /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02617FC1E3222F7004697EA /* FilterTableViewController.swift */; };
+		F02618031E326222004697EA /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02618021E326222004697EA /* RatingTableViewCell.swift */; };
+		F02618051E326252004697EA /* LengthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02618041E326252004697EA /* LengthTableViewCell.swift */; };
+		F02618071E3266F1004697EA /* DifficultyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02618061E3266F1004697EA /* DifficultyTableViewCell.swift */; };
 		F05F19C21E1BC26C00556CD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05F19C11E1BC26C00556CD6 /* AppDelegate.swift */; };
 		F05F19C41E1BC26C00556CD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05F19C31E1BC26C00556CD6 /* ViewController.swift */; };
 		F05F19CA1E1BC26C00556CD6 /* Roamni.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F05F19C81E1BC26C00556CD6 /* Roamni.xcdatamodeld */; };
 		F05F19CC1E1BC26C00556CD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F05F19CB1E1BC26C00556CD6 /* Assets.xcassets */; };
-		F05F19CF1E1BC26C00556CD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F05F19CD1E1BC26C00556CD6 /* LaunchScreen.storyboard */; };
 		F05F19DA1E1BC26C00556CD6 /* RoamniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05F19D91E1BC26C00556CD6 /* RoamniTests.swift */; };
 		F05F19E51E1BC26C00556CD6 /* RoamniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05F19E41E1BC26C00556CD6 /* RoamniUITests.swift */; };
 		F05F19F61E1D18B700556CD6 /* WalkingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05F19F51E1D18B700556CD6 /* WalkingTableViewCell.swift */; };
@@ -53,6 +55,7 @@
 		F063DE211E239B0400424985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F063DE201E239B0400424985 /* Main.storyboard */; };
 		F080D7671E2DF5AC0031B1CD /* TourForMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F080D7661E2DF5AC0031B1CD /* TourForMap.swift */; };
 		F080D7691E2F4A510031B1CD /* SearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F080D7681E2F4A510031B1CD /* SearchContainerViewController.swift */; };
+		F0BCCB141E362E52005162DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0BCCB131E362E52005162DB /* LaunchScreen.storyboard */; };
 		F600FF01EC8FB4F541B41A03 /* Pods_Roamni.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A531D37C9D53C200DDC8D43A /* Pods_Roamni.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,12 +107,14 @@
 		F02617F81E2F97C0004697EA /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		F02617FA1E2F97CA004697EA /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		F02617FC1E3222F7004697EA /* FilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		F02618021E326222004697EA /* RatingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
+		F02618041E326252004697EA /* LengthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthTableViewCell.swift; sourceTree = "<group>"; };
+		F02618061E3266F1004697EA /* DifficultyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultyTableViewCell.swift; sourceTree = "<group>"; };
 		F05F19BE1E1BC26C00556CD6 /* Roamni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roamni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05F19C11E1BC26C00556CD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F05F19C31E1BC26C00556CD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F05F19C91E1BC26C00556CD6 /* Roamni.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Roamni.xcdatamodel; sourceTree = "<group>"; };
 		F05F19CB1E1BC26C00556CD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F05F19CE1E1BC26C00556CD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F05F19D01E1BC26C00556CD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F05F19D51E1BC26C00556CD6 /* RoamniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoamniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05F19D91E1BC26C00556CD6 /* RoamniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoamniTests.swift; sourceTree = "<group>"; };
@@ -132,6 +137,7 @@
 		F063DE201E239B0400424985 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F080D7661E2DF5AC0031B1CD /* TourForMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourForMap.swift; sourceTree = "<group>"; };
 		F080D7681E2F4A510031B1CD /* SearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchContainerViewController.swift; sourceTree = "<group>"; };
+		F0BCCB131E362E52005162DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F51C488CFB7EC4528C52017A /* Pods-RoamniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoamniUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoamniUITests/Pods-RoamniUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +256,9 @@
 		F02618011E32258B004697EA /* FilterTableCell */ = {
 			isa = PBXGroup;
 			children = (
+				F02618021E326222004697EA /* RatingTableViewCell.swift */,
+				F02618041E326252004697EA /* LengthTableViewCell.swift */,
+				F02618061E3266F1004697EA /* DifficultyTableViewCell.swift */,
 			);
 			name = FilterTableCell;
 			sourceTree = "<group>";
@@ -288,7 +297,7 @@
 				F05F19C31E1BC26C00556CD6 /* ViewController.swift */,
 				F063DE201E239B0400424985 /* Main.storyboard */,
 				F05F19CB1E1BC26C00556CD6 /* Assets.xcassets */,
-				F05F19CD1E1BC26C00556CD6 /* LaunchScreen.storyboard */,
+				F0BCCB131E362E52005162DB /* LaunchScreen.storyboard */,
 				F05F19D01E1BC26C00556CD6 /* Info.plist */,
 				F05F19C81E1BC26C00556CD6 /* Roamni.xcdatamodeld */,
 				A6A639911E1DF5AA0026E207 /* GoogleService-Info.plist */,
@@ -459,9 +468,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F05F19CF1E1BC26C00556CD6 /* LaunchScreen.storyboard in Resources */,
 				A6A639921E1DF5AA0026E207 /* GoogleService-Info.plist in Resources */,
 				F05F19CC1E1BC26C00556CD6 /* Assets.xcassets in Resources */,
+				F0BCCB141E362E52005162DB /* LaunchScreen.storyboard in Resources */,
 				F063DE211E239B0400424985 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +635,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A60834301E24F0CA00775187 /* MyRoamniRequestTourCell.swift in Sources */,
+				F02618051E326252004697EA /* LengthTableViewCell.swift in Sources */,
 				A60834451E24F2D200775187 /* MyRoamniHowViewController.swift in Sources */,
 				F02617F91E2F97C0004697EA /* ContainerViewController.swift in Sources */,
 				A608342E1E24F0B100775187 /* MyRoamniUserCell.swift in Sources */,
@@ -636,6 +646,7 @@
 				F063DE1F1E2355DC00424985 /* Tour.swift in Sources */,
 				F05F19CA1E1BC26C00556CD6 /* Roamni.xcdatamodeld in Sources */,
 				F05F1A131E1D37E200556CD6 /* RecomTableViewCell.swift in Sources */,
+				F02618031E326222004697EA /* RatingTableViewCell.swift in Sources */,
 				F05F19C41E1BC26C00556CD6 /* ViewController.swift in Sources */,
 				F05F1A111E1D37CC00556CD6 /* MoreTableViewCell.swift in Sources */,
 				A608344D1E27592F00775187 /* MyRoamniLoginCell.swift in Sources */,
@@ -663,6 +674,7 @@
 				F05F1A151E1D37F100556CD6 /* PreTableViewCell.swift in Sources */,
 				A60834381E24F12B00775187 /* MyRoamniHowCell.swift in Sources */,
 				A60834491E24F41400775187 /* MyRoamniUserLoginViewController.swift in Sources */,
+				F02618071E3266F1004697EA /* DifficultyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,17 +708,6 @@
 			targetProxy = F05F19E11E1BC26C00556CD6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F05F19CD1E1BC26C00556CD6 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F05F19CE1E1BC26C00556CD6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F05F19E71E1BC26C00556CD6 /* Debug */ = {
@@ -811,7 +812,7 @@
 				INFOPLIST_FILE = Roamni/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Roamni.prototype1;
+				PRODUCT_BUNDLE_IDENTIFIER = Roamni.prototype2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -826,7 +827,7 @@
 				INFOPLIST_FILE = Roamni/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Roamni.prototype1;
+				PRODUCT_BUNDLE_IDENTIFIER = Roamni.prototype2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -48,13 +48,13 @@ class ContainerTableViewController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        print("the table category is \(self.tourCategory!)")
+        //print("the table category is \(self.tourCategory!)")
         super.viewWillAppear(animated)
         tableView.reloadData()
         //tableView
         print("dijici")
         //fetchTours()
-      
+      tableView.tableFooterView = UIView()
     }
     
     func fetchTours(){
@@ -74,7 +74,7 @@ class ContainerTableViewController: UITableViewController {
             //let longitude = (location["lon"] as! NSString).doubleValue
             let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             
-            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String)
+            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address: dictionary["address"] as! String)
             //            tour.Price = dictionary["Price"] as! String?
             //            tour.Star = dictionary["Star"] as! String?
             //            tour.StartPoint = dictionary["StartPoint"] as! String?

@@ -23,7 +23,10 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
         
         
     }
-    
+    override func viewDidLoad() {
+        navigationController?.navigationBar.barTintColor = UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -144,6 +147,7 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
             
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //        if indexPath.section == 3{

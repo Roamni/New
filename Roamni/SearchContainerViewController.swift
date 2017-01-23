@@ -18,6 +18,7 @@ class SearchContainerViewController: UIViewController {
     var getTableVCObject : ContainerTableViewController?
     var getMapVCObject : ContainerMapViewController?
     var tours = [Tour]()
+    var allTours = [Tour]()
     var filteredTours = [Tour]()
     var finalTours = [Tour]()
     let searchController = UISearchController(searchResultsController: nil)
@@ -26,28 +27,27 @@ class SearchContainerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         //clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-        print(self.tourCategory!)
-        getTableVCObject?.tourCategory = self.tourCategory
-        tours = [
-            Tour(category:"walking", name:"Melbourne Central",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 144.9685646), desc: "This is a great"),
-            Tour(category:"walking", name:"Victoria Gallery",locations:CLLocationCoordinate2D(latitude: -35.8426083, longitude: 142.9685646), desc: "This is a great"),
-            Tour(category:"driving", name:"The Great Ocean Road",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 142.9685646), desc: "This is a great"),
-            Tour(category:"cycling", name:"Yarra Valley",locations:CLLocationCoordinate2D(latitude: -37.6426083, longitude: 144.9665646), desc: "This is a great"),
-            Tour(category:"shopping", name:"DFO",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 143.9685646), desc: "This is a great"),
-            Tour(category:"realestate", name:"South Yarra",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 144.9685646), desc: "This is a great"),
-            Tour(category:"access", name:"Federation Square",locations:CLLocationCoordinate2D(latitude: -37.846083, longitude: 144.965646), desc: "This is a great"),
-            Tour(category:"more", name:"Sour Chew",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 140.965646), desc: "This is a great"),
-            Tour(category:"premium", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 143.9685646), desc: "This is a great")]
-            finalTours = tours
-            getTableVCObject?.tours = self.tours
-            getTableVCObject?.tableView.reloadData()
+        if self.swtichBtn.image == UIImage(named: "list") && (getTableVCObject?.tableView((getTableVCObject?.tableView)!, numberOfRowsInSection: 1))! != tours.count{
+            getMapVCObject = self.container.currentViewController as? ContainerMapViewController
+            getMapVCObject?.places.removeAll()
+            getMapVCObject?.tours = finalTours
+        }
+        //tours.removeAll()
+        //print(self.tourCategory)
+        //getTableVCObject?.tourCategory = self.tourCategory
+        
+        //filterContentForSearchText("more", scope: "Default")
+          
 
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tourCategory = "currentLocation"
+
+        navigationController?.navigationBar.barTintColor = UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        //self.tourCategory = "currentLocation"
         container!.segueIdentifierReceivedFromParent("first")
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -65,9 +65,33 @@ class SearchContainerViewController: UIViewController {
             print(controllers.count)
             
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            finalTours = tours
 
         }
+//
+//        tours = [
+//            Tour(category:"walking", name:"Melbourne Central",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 144.9685646), desc: "This is a great"),
+//            Tour(category:"walking", name:"Victoria Gallery",locations:CLLocationCoordinate2D(latitude: -35.8426083, longitude: 142.9685646), desc: "This is a great"),
+//            Tour(category:"driving", name:"The Great Ocean Road",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 142.9685646), desc: "This is a great"),
+//            Tour(category:"cycling", name:"Yarra Valley",locations:CLLocationCoordinate2D(latitude: -37.6426083, longitude: 144.9665646), desc: "This is a great"),
+//            Tour(category:"shopping", name:"DFO",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 143.9685646), desc: "This is a great"),
+//            Tour(category:"realestate", name:"South Yarra",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 144.9685646), desc: "This is a great"),
+//            Tour(category:"access", name:"Federation Square",locations:CLLocationCoordinate2D(latitude: -37.846083, longitude: 144.965646), desc: "This is a great"),
+//            Tour(category:"more", name:"Sour Chew",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 140.965646), desc: "This is a great"),
+//            Tour(category:"premium", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 143.9685646), desc: "This is a great")]
+        //        for tour in allTours{
+        //            if self.tourCategory == tour.category{
+        //                tours.append(tour)
+        //            }
+        //        }
         
+        getTableVCObject?.tours = self.tours
+        getTableVCObject?.tableView.reloadData()
+        if self.tourCategory != nil{
+            
+            filterContentForSearchText(self.tourCategory!, scope: "Default")
+            searchController.isActive = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,13 +103,21 @@ class SearchContainerViewController: UIViewController {
         print("caocaocaocao")
         //container!.segueIdentifierReceivedFromParent("first")
         if self.swtichBtn.image == UIImage(named: "map"){
-            self.swtichBtn.image = UIImage(named: "list")
-            container!.segueIdentifierReceivedFromParent("second")
-             getMapVCObject = self.container.currentViewController as? ContainerMapViewController
-             getMapVCObject?.tours = finalTours
+                self.swtichBtn.image = UIImage(named: "list")
+                container!.segueIdentifierReceivedFromParent("second")
+                getMapVCObject = self.container.currentViewController as? ContainerMapViewController
+            print("final is \(finalTours)")
+            if finalTours.count == 0 || (getTableVCObject?.tableView((getTableVCObject?.tableView)!, numberOfRowsInSection: 1))! == tours.count{
+                getMapVCObject?.tours = self.tours
+                getMapVCObject?.places.removeAll()
+            }else{
+                getMapVCObject?.tours = finalTours
+                 getMapVCObject?.places.removeAll()
+            }
         }else{
-            self.swtichBtn.image = UIImage(named: "map")
-            container!.segueIdentifierReceivedFromParent("first")
+                self.swtichBtn.image = UIImage(named: "map")
+                container!.segueIdentifierReceivedFromParent("first")
+                searchController.isActive = true
         }
         
     }
@@ -113,14 +145,15 @@ class SearchContainerViewController: UIViewController {
     func filterContentForSearchText(_ searchText: String, scope: String = "Default") {
         filteredTours = tours.filter({( tour : Tour) -> Bool in
             let categoryMatch = (scope == "Default") || (tour.category == scope)
-            return categoryMatch && tour.name.lowercased().contains(searchText.lowercased())
-            print(filteredTours)
+            return categoryMatch && tour.name.lowercased().contains(searchText.lowercased()) ||  tour.category.lowercased().contains(searchText.lowercased())
 
         })
         print("search box is clicked!")
         
         print("the tours are \(filteredTours)")
-        if filteredTours.count == 0{
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as! UITextField
+        
+        if filteredTours.count == 0 && textFieldInsideSearchBar.text == ""{
             getTableVCObject?.tours = tours
             getTableVCObject?.filteredTours = tours
             getTableVCObject?.tableView.reloadData()
@@ -129,6 +162,7 @@ class SearchContainerViewController: UIViewController {
             getTableVCObject?.tours = filteredTours
             getTableVCObject?.filteredTours = filteredTours
             getTableVCObject?.tableView.reloadData()
+            finalTours.removeAll()
             finalTours = filteredTours
             
         }
