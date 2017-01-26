@@ -43,7 +43,6 @@ class MyRoamniUserLoginViewController: UIViewController,FBSDKLoginButtonDelegate
         }
         print("successfully logged in ")
         if let user = FIRAuth.auth()?.currentUser{
-            let name = user.displayName
             let email = user.email
             let uid = user.uid
             let ref = FIRDatabase.database().reference()

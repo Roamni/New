@@ -101,9 +101,8 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyRoamniUserCell", for: indexPath as IndexPath) as! MyRoamniUserCell
             if let user = FIRAuth.auth()?.currentUser{
                 let name = user.displayName
-                let email = user.email
                 let photo = user.photoURL
-                let uid = user.uid
+             
                 
                 cell.userPhoto.loadImageUsingCacheWithUrlString(urlString: "\(photo!)")
                 cell.userLabel.text = name
