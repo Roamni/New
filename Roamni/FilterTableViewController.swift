@@ -171,8 +171,7 @@ class FilterTableViewController: UITableViewController,ValueReturner {
                     break
                 }
         returnValueToCaller?(self.filterTours3)
-        navigationController?.popViewController(animated: true)
-
+        navigationController!.popViewController(animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
