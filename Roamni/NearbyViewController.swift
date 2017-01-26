@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 import Firebase
-class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate{
 
     
 
@@ -17,6 +17,7 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     var place : TourForMap?
     var tours = [Tour]()
+    var tourInFive = [Tour]()
     var controller : SearchContainerViewController!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +48,24 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             Tour(category:"premium", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 143.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
             Tour(category:"recommandation", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.821638, longitude: 144.9623461), desc: "This is a great", address:"7 Riverside Quay, Southbank VIC",star:"1",length:"3",difficulty:"Pleasant")]
 
+        //tour in 5 km
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
+        let currentlocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+        for tour in tours{
+            let initialLocation = CLLocation(latitude: tour.locations.latitude, longitude: tour.locations.longitude)
+            let distance = currentlocation.distance(from: initialLocation)
+            if distance < 5000 {
+                
+                tourInFive.append(tour)
+            }
+        }
         controller = tabBarController?.viewControllers![1].childViewControllers[0] as! SearchContainerViewController
-        controller.tours = tours
+        controller.tours = tourInFive
     }
     
     func fetchTours(){
