@@ -9,6 +9,7 @@
 import UIKit
 
 class DifficultyTableViewCell: UITableViewCell {
+    var onButtonTapped : (() -> Void)? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +22,11 @@ class DifficultyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var difficultySegment: UISegmentedControl!
     
+    @IBAction func difficultSeg(_ sender: Any) {
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped()
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -9,7 +9,8 @@
 import UIKit
 
 class RatingTableViewCell: UITableViewCell {
-
+    var rating:Int?
+    var onButtonTapped : (() -> Void)? = nil
     @IBOutlet weak var rateSegment: UISegmentedControl!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,6 +21,9 @@ class RatingTableViewCell: UITableViewCell {
     }
     
     @IBAction func ratingSegmentControl(_ sender: Any) {
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped()
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

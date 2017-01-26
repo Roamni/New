@@ -622,7 +622,7 @@
                     <navigationItem key="navigationItem" title="Search" id="e4Z-FH-pCC">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="bJy-Hf-phF">
                             <connections>
-                                <segue destination="Ecy-Pc-qmA" kind="show" id="8a8-Gx-6Qw"/>
+                                <segue destination="Ecy-Pc-qmA" kind="show" identifier="filter" id="8a8-Gx-6Qw"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="map" id="hTU-pf-g0A">
@@ -1136,6 +1136,9 @@
                                                 <segment title="1 - 2hrs"/>
                                                 <segment title="&gt;2hrs"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="lenghtSeg:" destination="Q3U-Lr-10b" eventType="valueChanged" id="VK1-80-q3b"/>
+                                            </connections>
                                         </segmentedControl>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -1158,6 +1161,9 @@
                                                 <segment title="Brisk"/>
                                                 <segment title="Workout"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="difficultSeg:" destination="lnL-RV-JO3" eventType="valueChanged" id="15f-2q-rkj"/>
+                                            </connections>
                                         </segmentedControl>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -1181,7 +1187,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sh8-dk-gfL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1524" y="1377.6611694152925"/>
+            <point key="canvasLocation" x="-279" y="1496"/>
         </scene>
         <!--Container Map View Controller-->
         <scene sceneID="MHu-LW-KUb">

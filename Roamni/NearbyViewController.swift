@@ -45,7 +45,7 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             Tour(category:"access", name:"Federation Square",locations:CLLocationCoordinate2D(latitude: -37.846083, longitude: 144.965646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
             Tour(category:"more", name:"Sour Chew",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 140.965646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
             Tour(category:"premium", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 143.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
-            Tour(category:"recommandation", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.821638, longitude: 144.9623461), desc: "This is a great", address:"7 Riverside Quay, Southbank VIC",star:"1",length:"1",difficulty:"Pleasant")]
+            Tour(category:"recommandation", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.821638, longitude: 144.9623461), desc: "This is a great", address:"7 Riverside Quay, Southbank VIC",star:"1",length:"3",difficulty:"Pleasant")]
 
         controller = tabBarController?.viewControllers![1].childViewControllers[0] as! SearchContainerViewController
         controller.tours = tours

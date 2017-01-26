@@ -5,7 +5,9 @@
 //  Created by Hyman Li on 18/1/17.
 //  Copyright © 2017 ROAMNI. All rights reserved.
 //
-
+protocol ValueReturner {
+    var returnValueToCaller: ((Any) -> ())?  { get set }
+}
 import UIKit
 import CoreLocation
 
@@ -130,9 +132,27 @@ class SearchContainerViewController: UIViewController {
             container = segue.destination as! ContainerViewController
 
         }
+        if segue.identifier == "filter"
+        {
+            let controller:FilterTableViewController = segue.destination as! FilterTableViewController
+            
+            controller.tours = self.tours
+            controller.returnValueToCaller=handleFilter
+        
+        }
     }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func handleFilter(returnedValue:Any)
+    {
+        self.getTableVCObject?.tours = returnedValue as! [Tour]
+        self.getTableVCObject?.tableView.reloadData()
+    
+    
+    }
+    
+    
+    
+    
+       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("hello!!")
         searchController.isActive = false
         //searchController.dismissViewControllerAnimated()

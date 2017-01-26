@@ -8,8 +8,9 @@
 
 import UIKit
 
-class FilterTableViewController: UITableViewController {
-    
+class FilterTableViewController: UITableViewController,ValueReturner {
+    var returnValueToCaller: ((Any) -> ())?
+
     var Rateing:Int?
     var Length:Int?
     var Difficulty:Int?
@@ -20,148 +21,167 @@ class FilterTableViewController: UITableViewController {
     var filterTours3 = [Tour]()
 
     @IBAction func FilterDone(_ sender: Any) {
-        self.tours = (self.Fcontroller?.tours)!
+        filterTours1.removeAll()
+        filterTours2.removeAll()
+        filterTours3.removeAll()
+
         switch self.Rateing! {
+
         case 0 :
             
             for tour in tours
             {
                 if Int(tour.star)! <= 3
                 {
-                    filterTours1.append(tour)
+                    self.filterTours1.append(tour)
                 
                 }
             
             }
+            break
         case 1 :
             for tour in tours
             {
                 if Int(tour.star)! == 4
                 {
-                    filterTours1.append(tour)
+                    self.filterTours1.append(tour)
                     
                 }
-                
+              
             }
+            break
         case 2 :
             for tour in tours
             {
                 if Int(tour.star)! == 5
                 {
-                    filterTours1.append(tour)
+                    self.filterTours1.append(tour)
                     
                 }
-                
+             
             }
+            break
         default:
             for tour in tours
             {
                 if Int(tour.star)! <= 3
                 {
-                    filterTours1.append(tour)
+                    self.filterTours1.append(tour)
                     
                 }
                 
             }
-            
+           break
         }
             switch self.Length! {
             case 0 :
             
                 for tour in filterTours1
                 {
-                    if Int(tour.star)! <= 3
+                    if Int(tour.length)! <= 1
                     {
                         
-                        filterTours2.append(tour)
+                        self.filterTours2.append(tour)
                         
                     }
                     
                 }
+                break
             case 1 :
                 for tour in filterTours1
                 {
-                    if Int(tour.star)! == 4
+                    if Int(tour.length)!>1 && Int(tour.length)!<=2
                     {
-                        filterTours2.append(tour)
+                        self.filterTours2.append(tour)
                         
                     }
                     
                 }
+                break
             case 2 :
                 for tour in filterTours1
                 {
-                    if Int(tour.star)! == 5
+                    if Int(tour.length)! > 2
                     {
-                        filterTours2.append(tour)
+                        self.filterTours2.append(tour)
                         
                     }
                     
                 }
+                break
             default:
                 for tour in filterTours1
                 {
-                    if Int(tour.star)! <= 3
+                    if Int(tour.length)! <= 1
                     {
-                        filterTours2.append(tour)
+                        self.filterTours2.append(tour)
                         
                     }
+                    
                 }
+                break
             }
                    switch self.Difficulty! {
                     case 0 :
                         
                         for tour in filterTours2
                         {
-                            if Int(tour.star)! <= 3
+                            if tour.difficulty == "Pleasant"
                             {
-                                filterTours3.append(tour)
+                                self.filterTours3.append(tour)
                                 
                             }
                             
                         }
+                    break
                     case 1 :
                         for tour in filterTours2
                         {
-                            if Int(tour.star)! == 4
+                            if tour.difficulty == "Brisk"
                             {
-                                filterTours3.append(tour)
+                                self.filterTours3.append(tour)
                                 
                             }
+                            break
                             
                         }
+                    break
                     case 2 :
                         for tour in filterTours2
                         {
-                            if Int(tour.star)! == 5
+                            if tour.difficulty == "Workout"
                             {
-                                filterTours3.append(tour)
+                                self.filterTours3.append(tour)
                                 
                             }
                             
                         }
+                    break
                     default:
                         for tour in filterTours2
                         {
-                            if Int(tour.star)! <= 3
+                            if tour.difficulty == "Pleasant"
                             {
-                                filterTours3.append(tour)
+                                self.filterTours3.append(tour)
                                 
                             }
+                            
 
                         }
+                    break
                 }
-        self.Fcontroller?.getTableVCObject?.tours = self.filterTours3
-        self.Fcontroller?.getTableVCObject?.tableView.reloadData()
-        
-        
+        returnValueToCaller?(self.filterTours3)
+        navigationController?.popViewController(animated: true)
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
          navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
-
+        self.Rateing=0
+        self.Difficulty=0
+        self.Length=0
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -185,20 +205,43 @@ class FilterTableViewController: UITableViewController {
         if indexPath.section == 0{
             //Return the cell with identifier NotificationTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "RatingTableViewCell", for: indexPath as IndexPath) as! RatingTableViewCell
-            self.Rateing = cell.rateSegment.selectedSegmentIndex
+            cell.onButtonTapped={
+            
+                self.Rateing = cell.rateSegment.selectedSegmentIndex
+                print(self.Rateing)
+            
+            
+            }
+
             return cell
         }
         else if indexPath.section == 1{
             //Return the cell with identifier BackTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "LengthTableViewCell", for: indexPath as IndexPath) as! LengthTableViewCell
-            self.Length = cell.lengthSegment.selectedSegmentIndex
+ 
+            cell.onButtonTapped={
+                
+                self.Length = cell.lengthSegment.selectedSegmentIndex
+                print(self.Length)
+                
+                
+            }
+
             return cell
             
         }else {
             //Return the cell with identifier AboutTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "DifficultyTableViewCell", for: indexPath as IndexPath)
                 as! DifficultyTableViewCell
-            self.Difficulty = cell.difficultySegment.selectedSegmentIndex
+
+            cell.onButtonTapped={
+                
+                self.Difficulty = cell.difficultySegment.selectedSegmentIndex
+                print(self.Difficulty)
+                
+                
+            }
+
             return cell
             
             
@@ -235,6 +278,12 @@ class FilterTableViewController: UITableViewController {
         }
 
     }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let indexPath = tableView.indexPathForSelectedRow
+//        let  currentCell = tableView.cellForRow(at: indexPath!)! as UITableViewCell
+//        print(currentCell.reuseIdentifier)
+//        currentCell
+//    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
