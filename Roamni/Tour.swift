@@ -15,4 +15,7 @@ struct Tour {
     let locations : CLLocationCoordinate2D
     let desc : String
     let address : String
+    let star : String
+    let length: String
+    let difficulty:String
 }

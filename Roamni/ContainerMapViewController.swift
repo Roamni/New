@@ -100,7 +100,7 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
             //let longitude = (location["lon"] as! NSString).doubleValue
             let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             
-            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address:dictionary["desc"] as! String )
+            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address:dictionary["desc"] as! String ,star:"1",length:"1",difficulty:"Pleasant")
             //            tour.Price = dictionary["Price"] as! String?
             //            tour.Star = dictionary["Star"] as! String?
             //            tour.StartPoint = dictionary["StartPoint"] as! String?

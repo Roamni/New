@@ -36,16 +36,16 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
          navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         tabBarController?.tabBar.tintColor = UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         tours = [
-            Tour(category:"walking", name:"Melbourne Central",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 144.9685646), desc: "This is a great", address:"211 La Trobe St, Melbourne"),
-            Tour(category:"walking", name:"Victoria Gallery",locations:CLLocationCoordinate2D(latitude: -35.8426083, longitude: 142.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"driving", name:"The Great Ocean Road",locations:CLLocationCoordinate2D(latitude: -38.6805638, longitude: 143.3894295), desc: "This is a great", address:"Great Ocean Rd, Victoria"),
-            Tour(category:"cycling", name:"Yarra Valley",locations:CLLocationCoordinate2D(latitude: -37.6426083, longitude: 144.9665646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"shopping", name:"DFO",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 143.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"realestate", name:"South Yarra",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 144.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"access", name:"Federation Square",locations:CLLocationCoordinate2D(latitude: -37.846083, longitude: 144.965646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"more", name:"Sour Chew",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 140.965646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"premium", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 143.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne"),
-            Tour(category:"recommandation", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.821638, longitude: 144.9623461), desc: "This is a great", address:"7 Riverside Quay, Southbank VIC")]
+            Tour(category:"walking", name:"Melbourne Central",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 144.9685646), desc: "This is a great", address:"211 La Trobe St, Melbourne", star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"walking", name:"Victoria Gallery",locations:CLLocationCoordinate2D(latitude: -35.8426083, longitude: 142.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"driving", name:"The Great Ocean Road",locations:CLLocationCoordinate2D(latitude: -38.6805638, longitude: 143.3894295), desc: "This is a great", address:"Great Ocean Rd, Victoria",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"cycling", name:"Yarra Valley",locations:CLLocationCoordinate2D(latitude: -37.6426083, longitude: 144.9665646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"shopping", name:"DFO",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 143.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"realestate", name:"South Yarra",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 144.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"access", name:"Federation Square",locations:CLLocationCoordinate2D(latitude: -37.846083, longitude: 144.965646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"more", name:"Sour Chew",locations:CLLocationCoordinate2D(latitude: -37.8426083, longitude: 140.965646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"premium", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.26083, longitude: 143.9685646), desc: "This is a great", address:"180 St Kilda Rd, Melbourne",star:"1",length:"1",difficulty:"Pleasant"),
+            Tour(category:"recommandation", name:"Eureka Tower Melbourne",locations:CLLocationCoordinate2D(latitude: -37.821638, longitude: 144.9623461), desc: "This is a great", address:"7 Riverside Quay, Southbank VIC",star:"1",length:"1",difficulty:"Pleasant")]
 
         controller = tabBarController?.viewControllers![1].childViewControllers[0] as! SearchContainerViewController
         controller.tours = tours
@@ -68,7 +68,7 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //let longitude = (location["lon"] as! NSString).doubleValue
             let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             
-            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address: dictionary["desc"] as! String)
+            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address: dictionary["desc"] as! String,star:"1",length:"1",difficulty:"Pleasant")
             //            tour.Price = dictionary["Price"] as! String?
             //            tour.Star = dictionary["Star"] as! String?
             //            tour.StartPoint = dictionary["StartPoint"] as! String?

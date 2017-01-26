@@ -74,7 +74,7 @@ class ContainerTableViewController: UITableViewController {
             //let longitude = (location["lon"] as! NSString).doubleValue
             let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             
-            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address: dictionary["address"] as! String)
+            let tour = Tour(category:dictionary["TourType"] as! String, name:dictionary["Name"] as! String,locations:coordinate, desc: dictionary["desc"] as! String, address: dictionary["address"] as! String,star:"1",length:"1",difficulty:"Pleasant")
             //            tour.Price = dictionary["Price"] as! String?
             //            tour.Star = dictionary["Star"] as! String?
             //            tour.StartPoint = dictionary["StartPoint"] as! String?
@@ -140,7 +140,7 @@ class ContainerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerTableViewCell", for: indexPath) as! ContainerTableViewCell
         let tour: Tour
         if searchController.isActive && searchController.searchBar.text != "" {
             tour = filteredTours[indexPath.row]
@@ -149,6 +149,7 @@ class ContainerTableViewController: UITableViewController {
         }
         cell.textLabel!.text = tour.name
         cell.detailTextLabel!.text = tour.category
+        cell.StarLabel.text = tour.star
         return cell
     }
     

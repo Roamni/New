@@ -9,7 +9,153 @@
 import UIKit
 
 class FilterTableViewController: UITableViewController {
+    
+    var Rateing:Int?
+    var Length:Int?
+    var Difficulty:Int?
+    var Fcontroller:SearchContainerViewController?
+    var tours = [Tour]()
+    var filterTours1 = [Tour]()
+    var filterTours2 = [Tour]()
+    var filterTours3 = [Tour]()
 
+    @IBAction func FilterDone(_ sender: Any) {
+        self.tours = (self.Fcontroller?.tours)!
+        switch self.Rateing! {
+        case 0 :
+            
+            for tour in tours
+            {
+                if Int(tour.star)! <= 3
+                {
+                    filterTours1.append(tour)
+                
+                }
+            
+            }
+        case 1 :
+            for tour in tours
+            {
+                if Int(tour.star)! == 4
+                {
+                    filterTours1.append(tour)
+                    
+                }
+                
+            }
+        case 2 :
+            for tour in tours
+            {
+                if Int(tour.star)! == 5
+                {
+                    filterTours1.append(tour)
+                    
+                }
+                
+            }
+        default:
+            for tour in tours
+            {
+                if Int(tour.star)! <= 3
+                {
+                    filterTours1.append(tour)
+                    
+                }
+                
+            }
+            
+        }
+            switch self.Length! {
+            case 0 :
+            
+                for tour in filterTours1
+                {
+                    if Int(tour.star)! <= 3
+                    {
+                        
+                        filterTours2.append(tour)
+                        
+                    }
+                    
+                }
+            case 1 :
+                for tour in filterTours1
+                {
+                    if Int(tour.star)! == 4
+                    {
+                        filterTours2.append(tour)
+                        
+                    }
+                    
+                }
+            case 2 :
+                for tour in filterTours1
+                {
+                    if Int(tour.star)! == 5
+                    {
+                        filterTours2.append(tour)
+                        
+                    }
+                    
+                }
+            default:
+                for tour in filterTours1
+                {
+                    if Int(tour.star)! <= 3
+                    {
+                        filterTours2.append(tour)
+                        
+                    }
+                }
+            }
+                   switch self.Difficulty! {
+                    case 0 :
+                        
+                        for tour in filterTours2
+                        {
+                            if Int(tour.star)! <= 3
+                            {
+                                filterTours3.append(tour)
+                                
+                            }
+                            
+                        }
+                    case 1 :
+                        for tour in filterTours2
+                        {
+                            if Int(tour.star)! == 4
+                            {
+                                filterTours3.append(tour)
+                                
+                            }
+                            
+                        }
+                    case 2 :
+                        for tour in filterTours2
+                        {
+                            if Int(tour.star)! == 5
+                            {
+                                filterTours3.append(tour)
+                                
+                            }
+                            
+                        }
+                    default:
+                        for tour in filterTours2
+                        {
+                            if Int(tour.star)! <= 3
+                            {
+                                filterTours3.append(tour)
+                                
+                            }
+
+                        }
+                }
+        self.Fcontroller?.getTableVCObject?.tours = self.filterTours3
+        self.Fcontroller?.getTableVCObject?.tableView.reloadData()
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
@@ -39,17 +185,20 @@ class FilterTableViewController: UITableViewController {
         if indexPath.section == 0{
             //Return the cell with identifier NotificationTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "RatingTableViewCell", for: indexPath as IndexPath) as! RatingTableViewCell
+            self.Rateing = cell.rateSegment.selectedSegmentIndex
             return cell
         }
         else if indexPath.section == 1{
             //Return the cell with identifier BackTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "LengthTableViewCell", for: indexPath as IndexPath) as! LengthTableViewCell
+            self.Length = cell.lengthSegment.selectedSegmentIndex
             return cell
             
         }else {
             //Return the cell with identifier AboutTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "DifficultyTableViewCell", for: indexPath as IndexPath)
                 as! DifficultyTableViewCell
+            self.Difficulty = cell.difficultySegment.selectedSegmentIndex
             return cell
             
             
