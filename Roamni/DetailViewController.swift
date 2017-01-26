@@ -21,35 +21,75 @@
 */
 
 import UIKit
+import MapKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController,MKMapViewDelegate {
+    
+    @IBOutlet weak var detailMap: MKMapView!
   
-  @IBOutlet weak var detailDescriptionLabel: UILabel!
-  @IBOutlet weak var candyImageView: UIImageView!
-  
-  var detailTour: Tour? {
-    didSet {
-      configureView()
-    }
-  }
-  
-  func configureView() {
-    if let detailTour = detailTour {
-      if let detailDescriptionLabel = detailDescriptionLabel, let candyImageView = candyImageView {
-        detailDescriptionLabel.text = detailTour.name
-        candyImageView.image = UIImage(named: detailTour.name)
-        title = detailTour.category
-      }
-    }
-  }
-  
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var lengthLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
+    var detailTour: Tour?
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.navigationBar.barTintColor = UIColor(red: 103.0/255.0, green: 65.0/255.0, blue: 114.0/255.0, alpha: 1.0)
      navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-    configureView()
-  }
-  
+    //configureView()
+    self.titleLabel.text = detailTour?.name
+    self.lengthLabel.text = detailTour?.length
+    self.ratingLabel.text = detailTour?.star
+    self.descLabel.text = detailTour?.desc
+    detailMap.delegate = self
+    detailMap.showsUserLocation = true
+    let sourceLocation = CLLocationCoordinate2D(latitude: -37.8843292, longitude: 145.0210106)
+    let destinationLocation = CLLocationCoordinate2D(latitude: -37.8378656, longitude: 144.9823664)
+    let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+    let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
+    let sourceMapItem =  MKMapItem(placemark: sourcePlacemark)
+    let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+    let sourceAnnotation = MKPointAnnotation()
+    sourceAnnotation.title = detailTour?.name
+    if let location = sourcePlacemark.location{
+        sourceAnnotation.coordinate = location.coordinate
+    }
+    let destinationAnnotation = MKPointAnnotation()
+    destinationAnnotation.title = "destination"
+    if let location = destinationPlacemark.location{
+        destinationAnnotation.coordinate = location.coordinate
+    }
+    self.detailMap.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true)
+    let directionRequest = MKDirectionsRequest()
+    directionRequest.source = sourceMapItem
+    directionRequest.destination = destinationMapItem
+    directionRequest.requestsAlternateRoutes = false
+    directionRequest.transportType = MKDirectionsTransportType.walking
+    let directions = MKDirections(request: directionRequest)
+    directions.calculate(completionHandler: {(response:MKDirectionsResponse?, error:Error?) in
+        
+            if  error != nil {
+                print("Error: \(error)")
+            }
+            else
+            {
+                for route in (response?.routes)!
+                {
+                    self.detailMap.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+                    for next in route.steps{
+                        print(next.instructions)
+                    }
+                }
+        }
+    })
+    }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolygonRenderer(overlay:overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 5.0
+        return renderer
+    }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }

@@ -141,6 +141,7 @@ class SearchContainerViewController: UIViewController {
         
         }
     }
+    
     func handleFilter(returnedValue:Any)
     {
         self.getTableVCObject?.tours = returnedValue as! [Tour]

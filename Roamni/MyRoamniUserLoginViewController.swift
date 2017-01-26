@@ -22,7 +22,9 @@ class MyRoamniUserLoginViewController: UIViewController,FBSDKLoginButtonDelegate
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        try!FIRAuth.auth()?.signOut()
         print("log out of facebook")
+        
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -40,6 +42,16 @@ class MyRoamniUserLoginViewController: UIViewController,FBSDKLoginButtonDelegate
             }
         }
         print("successfully logged in ")
+        if let user = FIRAuth.auth()?.currentUser{
+            let name = user.displayName
+            let email = user.email
+            let uid = user.uid
+            let ref = FIRDatabase.database().reference()
+            ref.child("users/\(uid)/email").setValue(email)
+        }
+        else{
+        print("no user")
+        }
     }
     
 

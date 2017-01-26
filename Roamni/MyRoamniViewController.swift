@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    
+        
     override func viewWillAppear(_ animated: Bool) {
          self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -98,6 +99,20 @@ class MyRoamniViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.section == 0{
             //Return the cell with identifier NotificationTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyRoamniUserCell", for: indexPath as IndexPath) as! MyRoamniUserCell
+            if let user = FIRAuth.auth()?.currentUser{
+                let name = user.displayName
+                let email = user.email
+                let photo = user.photoURL
+                let uid = user.uid
+                
+                cell.userPhoto.loadImageUsingCacheWithUrlString(urlString: "\(photo!)")
+                cell.userLabel.text = name
+            }else
+                {
+                    cell.userPhoto.image = UIImage(named: "footprint")
+                    cell.userLabel.text = "Please log in"
+                
+            }
             return cell
         }
         else if indexPath.section == 1{

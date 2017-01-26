@@ -207,8 +207,7 @@ class FilterTableViewController: UITableViewController,ValueReturner {
             cell.onButtonTapped={
             
                 self.Rateing = cell.rateSegment.selectedSegmentIndex
-                print(self.Rateing)
-            
+
             
             }
 
@@ -221,7 +220,6 @@ class FilterTableViewController: UITableViewController,ValueReturner {
             cell.onButtonTapped={
                 
                 self.Length = cell.lengthSegment.selectedSegmentIndex
-                print(self.Length)
                 
                 
             }
@@ -236,8 +234,7 @@ class FilterTableViewController: UITableViewController,ValueReturner {
             cell.onButtonTapped={
                 
                 self.Difficulty = cell.difficultySegment.selectedSegmentIndex
-                print(self.Difficulty)
-                
+
                 
             }
 
