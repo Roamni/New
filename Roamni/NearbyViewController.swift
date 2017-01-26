@@ -65,7 +65,7 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         controller = tabBarController?.viewControllers![1].childViewControllers[0] as! SearchContainerViewController
-        controller.tours = tourInFive
+        controller.tours = tours
     }
     
     func fetchTours(){

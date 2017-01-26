@@ -43,10 +43,9 @@ class DetailViewController: UIViewController,MKMapViewDelegate {
     self.ratingLabel.text = detailTour?.star
     self.descLabel.text = detailTour?.desc
     detailMap.delegate = self
-    detailMap.showsUserLocation = true
-    let sourceLocation = CLLocationCoordinate2D(latitude: -37.8843292, longitude: 145.0210106)
+    let sourceLocation = detailTour?.locations
     let destinationLocation = CLLocationCoordinate2D(latitude: -37.8378656, longitude: 144.9823664)
-    let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+    let sourcePlacemark = MKPlacemark(coordinate: sourceLocation!, addressDictionary: nil)
     let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
     let sourceMapItem =  MKMapItem(placemark: sourcePlacemark)
     let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
@@ -64,32 +63,30 @@ class DetailViewController: UIViewController,MKMapViewDelegate {
     let directionRequest = MKDirectionsRequest()
     directionRequest.source = sourceMapItem
     directionRequest.destination = destinationMapItem
-    directionRequest.requestsAlternateRoutes = false
-    directionRequest.transportType = MKDirectionsTransportType.walking
+    directionRequest.transportType = .any
     let directions = MKDirections(request: directionRequest)
-    directions.calculate(completionHandler: {(response:MKDirectionsResponse?, error:Error?) in
-        
-            if  error != nil {
+    directions.calculate {(response, error) -> Void in
+        guard let response = response else
+        {
+            if let error = error {
                 print("Error: \(error)")
             }
-            else
-            {
-                for route in (response?.routes)!
-                {
-                    self.detailMap.add(route.polyline, level: MKOverlayLevel.aboveRoads)
-                    for next in route.steps{
-                        print(next.instructions)
-                    }
-                }
+            return
         }
-    })
-    }
+                    let route = response.routes[0]
+                    self.detailMap.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+            let rect = route.polyline.boundingMapRect
+                    self.detailMap.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            
+            }
+        }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolygonRenderer(overlay:overlay)
+        let renderer = MKPolylineRenderer(overlay:overlay)
         renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 5.0
         return renderer
     }
+        
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
