@@ -17,6 +17,7 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
     var tours = [Tour]()
     var places = [TourForMap]()
     var aTour : TourForMap?
+    var realTour: Tour?
     let regionRadius: CLLocationDistance = 1000
     
     override func viewDidLoad() {
@@ -145,6 +146,8 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
         if control === view.rightCalloutAccessoryView {
             self.aTour = view.annotation as? TourForMap
             performSegue(withIdentifier: "goToDetail", sender: self)
+        
+            
         }
     }
     
@@ -176,14 +179,27 @@ class ContainerMapViewController: UIViewController,CLLocationManagerDelegate, MK
     }
 
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDetail"
+        {
+            let controller:DetailViewController = segue.destination as! DetailViewController
+            for tour in tours{
+                if aTour?.title == tour.name
+                {
+                    self.realTour = tour
+                    
+                }
+            }
+     controller.detailTour = self.realTour
+            controller.hidesBottomBarWhenPushed = true
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
