@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 import Firebase
-class ContainerTableViewController: UITableViewController {
+class ContainerTableViewController: UITableViewController,CLLocationManagerDelegate{
 
     var tourCategory : String?
     var detailViewController: DetailViewController? = nil
@@ -20,7 +20,7 @@ class ContainerTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+
 
 //        // Setup the Search Controller
 //        searchController.searchResultsUpdater = self
@@ -51,6 +51,7 @@ class ContainerTableViewController: UITableViewController {
         //print("the table category is \(self.tourCategory!)")
         super.viewWillAppear(animated)
         tableView.reloadData()
+
         //tableView
         print("dijici")
         //fetchTours()
@@ -147,9 +148,27 @@ class ContainerTableViewController: UITableViewController {
         } else {
             tour = tours[indexPath.row]
         }
-        cell.textLabel!.text = tour.name
-        cell.detailTextLabel!.text = tour.category
+        cell.textlabel!.text = tour.name
+        cell.detailTextlabel!.text = tour.category
         cell.StarLabel.text = tour.star
+        
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
+        let currentlocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+        let initialLocation = CLLocation(latitude: tour.locations.latitude, longitude: tour.locations.longitude)
+        let distance = currentlocation.distance(from: initialLocation)
+        let doubleDis : Double = distance
+        let intDis : Int = Int(doubleDis)
+        cell.distanceLabel.text = "\(intDis)m"
+        //cell.starrating = CGFloat((tour.star as NSString).floatValue)
+        let starView = StarViewController()
+        cell.delegate = starView
+        cell.Pass()
+
         return cell
     }
     

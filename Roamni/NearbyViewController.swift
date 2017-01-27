@@ -65,6 +65,7 @@ class NearbyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         controller = tabBarController?.viewControllers![1].childViewControllers[0] as! SearchContainerViewController
+        //change here to apply 5 km
         controller.tours = tours
     }
     

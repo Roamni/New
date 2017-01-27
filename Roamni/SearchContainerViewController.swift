@@ -163,10 +163,27 @@ class SearchContainerViewController: UIViewController {
         
     }
     
-    func filterContentForSearchText(_ searchText: String, scope: String = "Default") {
-        filteredTours = tours.filter({( tour : Tour) -> Bool in
-            let categoryMatch = (scope == "Default") || (tour.category == scope)
-            return categoryMatch && tour.name.lowercased().contains(searchText.lowercased()) ||  tour.category.lowercased().contains(searchText.lowercased())
+    func filterContentForSearchText(_ searchText: String, scope: String) {
+               filteredTours = tours.filter({( tour : Tour) -> Bool in
+                var fieldToSearch:String?
+                switch scope {
+                case "Default" :
+                    fieldToSearch = tour.name
+                case "Rating":
+                    fieldToSearch = tour.star
+                case "Length":
+                    fieldToSearch = tour.length
+                default:
+                    fieldToSearch = nil
+                }
+                if fieldToSearch == nil{
+                   self.filteredTours.removeAll()
+                    return false
+                }
+
+          //  let categoryMatch = (scope == "Default") || (tour.category == scope)
+            
+            return fieldToSearch!.lowercased().contains(searchText.lowercased()) ||  tour.category.lowercased().contains(searchText.lowercased())
 
         })
         print("search box is clicked!")
@@ -189,6 +206,7 @@ class SearchContainerViewController: UIViewController {
         }
         //let getTableVCObject = self.container.currentViewController as? ContainerTableViewController
     }
+    
   
     /*
     // MARK: - Navigation
@@ -216,6 +234,7 @@ class SearchContainerViewController: UIViewController {
             let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
             filterContentForSearchText(searchController.searchBar.text!, scope: scope)
         }
+    
 }
 
 
