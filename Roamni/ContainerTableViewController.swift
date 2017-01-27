@@ -150,7 +150,7 @@ class ContainerTableViewController: UITableViewController,CLLocationManagerDeleg
         }
         cell.textlabel!.text = tour.name
         cell.detailTextlabel!.text = tour.category
-        cell.StarLabel.text = tour.star
+        cell.StarLabel.text = tour.length + " hr"//tour.star
         
         let locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -163,7 +163,7 @@ class ContainerTableViewController: UITableViewController,CLLocationManagerDeleg
         let distance = currentlocation.distance(from: initialLocation)
         let doubleDis : Double = distance
         let intDis : Int = Int(doubleDis)
-        cell.distanceLabel.text = "\(intDis)m"
+        cell.distanceLabel.text = "\(intDis/1000) km"
         //cell.starrating = CGFloat((tour.star as NSString).floatValue)
         let starView = StarViewController()
         cell.delegate = starView

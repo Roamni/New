@@ -39,6 +39,9 @@ class DetailViewController: UIViewController,MKMapViewDelegate {
      navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     //configureView()
     self.titleLabel.text = detailTour?.name
+    self.titleLabel.adjustsFontSizeToFitWidth = true
+
+    //self.title = detailTour?.name
     self.lengthLabel.text = detailTour?.length
     self.ratingLabel.text = detailTour?.star
     self.descLabel.text = detailTour?.desc
