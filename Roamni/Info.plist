@@ -44,8 +44,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>access location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>access location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
