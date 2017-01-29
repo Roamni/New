@@ -12,7 +12,7 @@ target 'Roamni' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   pod 'Firebase/Database'
-
+  pod 'Firebase/Storage' 
   target 'RoamniTests' do
     inherit! :search_paths
     # Pods for testing
